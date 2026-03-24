@@ -123,9 +123,12 @@ async function loadStandings() {
         else if (t.position >= total - 2) pc = 'rel';
         const gd   = t.goalDifference;
         const form = (t.form || '').split(',').filter(Boolean).slice(-5);
+        const badgeHtml = t.emblem
+          ? `<img class="t-badge" src="${t.emblem}" onerror="this.outerHTML='<div class=&quot;t-badge-ph&quot;></div>'" />`
+          : `<div class="t-badge-ph"></div>`;
         return `<tr>
           <td><span class="pos-badge ${pc}">${t.position}</span></td>
-          <td><div class="team-cell"><div class="t-badge-ph"></div>${t.teamShortName ?? '—'}</div></td>
+          <td><div class="team-cell">${badgeHtml}${t.teamShortName ?? '—'}</div></td>
           <td>${t.playedGames}</td><td>${t.won}</td><td>${t.draw}</td><td>${t.lost}</td>
           <td>${t.goalsFor}</td><td>${t.goalsAgainst}</td>
           <td class="${gd > 0 ? 'sg-pos' : gd < 0 ? 'sg-neg' : ''}">${gd > 0 ? '+' + gd : gd}</td>
