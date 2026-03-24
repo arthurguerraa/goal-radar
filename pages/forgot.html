@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FStats — Recuperar senha</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<div class="auth-page">
+  <div class="auth-box">
+    <div class="auth-logo">FStats</div>
+    <div class="auth-title">Recuperar senha</div>
+    <div class="auth-sub">Informe seu usuário e enviaremos as instruções por e-mail.</div>
+
+    <div class="alert alert-error" id="forgot-error"></div>
+    <div class="alert alert-success" id="forgot-success"></div>
+
+    <div class="form-group">
+      <label>Usuário</label>
+      <input class="form-control" id="forgot-username" type="text" placeholder="seu_usuario"
+        onkeydown="if(event.key==='Enter') doForgot()" />
+    </div>
+
+    <button class="btn btn-primary" id="forgot-btn" onclick="doForgot()">
+      <span>Enviar instruções</span>
+    </button>
+
+    <div class="auth-footer">
+      <a href="login.html">← Voltar ao login</a>
+    </div>
+  </div>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+</body>
+</html>

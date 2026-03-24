@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FStats — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div class="app-header-inner">
+    <a class="app-logo" href="dashboard.html">FStats</a>
+
+    <nav class="nav-tabs">
+      <a class="nav-tab active" href="dashboard.html">⚽ Dashboard</a>
+      <a class="nav-tab" href="profile.html">👤 Perfil</a>
+    </nav>
+
+    <div class="header-right">
+      <div class="comp-search-wrap">
+        <div class="comp-search-inner">
+          <input class="comp-search-input" id="compCodeInput" type="text"
+            placeholder="Código da liga (ex: PL)" maxlength="10"
+            onkeydown="if(event.key==='Enter') searchComp()" />
+          <button class="comp-search-btn" onclick="searchComp()">⚽</button>
+        </div>
+        <div class="comp-chips">
+          <span class="comp-chip" onclick="loadChip(this,'PL')">Premier League</span>
+          <span class="comp-chip" onclick="loadChip(this,'BL1')">Bundesliga</span>
+          <span class="comp-chip" onclick="loadChip(this,'SA')">Serie A</span>
+          <span class="comp-chip" onclick="loadChip(this,'PD')">La Liga</span>
+          <span class="comp-chip" onclick="loadChip(this,'FL1')">Ligue 1</span>
+          <span class="comp-chip" onclick="loadChip(this,'BSA')">Brasileirão</span>
+        </div>
+      </div>
+
+      <div class="status-chip">
+        <div class="dot" id="statusDot"></div>
+        <span id="statusTxt">—</span>
+      </div>
+
+      <a class="avatar-btn" href="profile.html" id="avatarBtn">
+        <span id="avatarInitial">?</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- CONTENT -->
+<main class="app-content">
+
+  <!-- Comp strip -->
+  <div id="compStrip" class="comp-strip" style="display:none">
+    <div id="compStripLogo" class="comp-strip-logo-ph">⚽</div>
+    <div class="comp-strip-info">
+      <h2 id="compStripName">—</h2>
+      <div class="comp-strip-meta">
+        <span>Rodada: <strong id="csRound">—</strong></span>
+        <span>Temporada: <strong id="csSeason">—</strong></span>
+        <span>Times: <strong id="csCount">—</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <!-- Classificação -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-head-title">Classificação</span>
+      </div>
+      <div id="standingsEl"></div>
+    </div>
+
+    <!-- Confrontos -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-head-title">Confrontos</span>
+        <div class="round-nav">
+          <button class="rnav-btn" id="prevRd" onclick="changeRound(-1)">‹</button>
+          <span class="rnav-label" id="rdLabel">Rod. —</span>
+          <button class="rnav-btn" id="nextRd" onclick="changeRound(1)">›</button>
+        </div>
+      </div>
+      <div id="matchesEl"></div>
+    </div>
+  </div>
+
+  <!-- Médias -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-head-title">Médias de Gols — Casa & Fora</span>
+    </div>
+    <div class="tscroll">
+      <div id="averagesEl"></div>
+    </div>
+  </div>
+
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon" id="toastIcon"></span>
+  <span id="toastMsg"></span>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/user.js"></script>
+<script src="../js/competition.js"></script>
+<script>
+  if (!requireAuth()) throw new Error('not auth');
+  loadMe();
+  initCompSearch();
+</script>
+</body>
+</html>

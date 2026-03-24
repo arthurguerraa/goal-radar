@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FStats — Perfil</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div class="app-header-inner">
+    <a class="app-logo" href="dashboard.html">FStats</a>
+
+    <nav class="nav-tabs">
+      <a class="nav-tab" href="dashboard.html">⚽ Dashboard</a>
+      <a class="nav-tab active" href="profile.html">👤 Perfil</a>
+    </nav>
+
+    <div class="header-right">
+      <a class="avatar-btn" href="profile.html" id="avatarBtn">
+        <span id="avatarInitial">?</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- CONTENT -->
+<main class="app-content">
+  <div class="section-header">
+    <h2>Perfil</h2>
+  </div>
+
+  <div class="profile-layout">
+
+    <!-- CARD LATERAL -->
+    <div class="profile-card-main">
+      <div class="profile-avatar-wrap">
+        <div class="profile-avatar" id="profileAvatarDisplay">
+          <span id="profileAvatarInitial">?</span>
+        </div>
+        <div class="avatar-ring"></div>
+      </div>
+
+      <div class="profile-name" id="profileDisplayName">—</div>
+      <div class="profile-username" id="profileDisplayUsername">@—</div>
+      <div id="profileRoleBadge" class="role-badge">—</div>
+
+      <div class="profile-divider"></div>
+
+      <div class="profile-info-item">
+        <span class="icon">✉️</span>
+        <div>
+          <div style="font-size:.68rem;color:var(--text3);margin-bottom:2px;">E-mail</div>
+          <strong id="profileEmail">—</strong>
+        </div>
+      </div>
+      <div class="profile-info-item">
+        <span class="icon">🎂</span>
+        <div>
+          <div style="font-size:.68rem;color:var(--text3);margin-bottom:2px;">Nascimento</div>
+          <strong id="profileDob">—</strong>
+        </div>
+      </div>
+      <div class="profile-info-item">
+        <span class="icon">✅</span>
+        <div>
+          <div style="font-size:.68rem;color:var(--text3);margin-bottom:2px;">Verificação</div>
+          <strong id="profileVerified">—</strong>
+        </div>
+      </div>
+
+      <div class="profile-divider"></div>
+
+      <div class="profile-actions">
+        <button class="btn btn-danger btn-sm" onclick="openDeleteModal()">🗑 Desativar conta</button>
+        <button class="btn btn-ghost btn-sm" onclick="doLogout()">↩ Sair</button>
+      </div>
+    </div>
+
+    <!-- FORMULÁRIOS DE EDIÇÃO -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <!-- Editar perfil -->
+      <div class="edit-card">
+        <div class="edit-card-head"><h3>Editar Perfil</h3></div>
+        <div class="edit-card-body">
+          <div class="alert alert-error" id="editp-error"></div>
+          <div class="alert alert-success" id="editp-success"></div>
+          <div class="form-group">
+            <label>URL da Foto de Perfil</label>
+            <input class="form-control" id="edit-pic" type="url" placeholder="https://..." />
+            <div class="form-help">Insira a URL de uma imagem pública.</div>
+          </div>
+          <div class="form-group">
+            <label>Data de Nascimento</label>
+            <input class="form-control" id="edit-dob" type="date" />
+          </div>
+          <button class="btn btn-primary" style="max-width:200px" id="editp-btn" onclick="doEditProfile()">
+            Salvar perfil
+          </button>
+        </div>
+      </div>
+
+      <!-- Alterar e-mail -->
+      <div class="edit-card">
+        <div class="edit-card-head"><h3>Alterar E-mail</h3></div>
+        <div class="edit-card-body">
+          <div class="alert alert-error" id="edite-error"></div>
+          <div class="alert alert-success" id="edite-success"></div>
+          <div class="form-group">
+            <label>Novo E-mail</label>
+            <input class="form-control" id="edit-email" type="email" placeholder="novo@email.com" />
+            <div class="form-help">Um link de confirmação será enviado para o novo endereço.</div>
+          </div>
+          <button class="btn btn-primary" style="max-width:220px" id="edite-btn" onclick="doEditEmail()">
+            Solicitar alteração
+          </button>
+        </div>
+      </div>
+
+      <!-- Alterar senha -->
+      <div class="edit-card">
+        <div class="edit-card-head"><h3>Alterar Senha</h3></div>
+        <div class="edit-card-body">
+          <div class="alert alert-error" id="editpw-error"></div>
+          <div class="alert alert-success" id="editpw-success"></div>
+          <div class="form-group">
+            <label>Senha atual</label>
+            <div class="password-wrap">
+              <input class="form-control" id="pw-current" type="password" placeholder="••••••••" />
+              <button class="toggle-pass" onclick="togglePass('pw-current',this)">👁</button>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nova senha</label>
+              <div class="password-wrap">
+                <input class="form-control" id="pw-new" type="password" placeholder="min. 8 chars" />
+                <button class="toggle-pass" onclick="togglePass('pw-new',this)">👁</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Confirmar nova senha</label>
+              <div class="password-wrap">
+                <input class="form-control" id="pw-confirm" type="password" placeholder="repita" />
+                <button class="toggle-pass" onclick="togglePass('pw-confirm',this)">👁</button>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="max-width:200px" id="editpw-btn" onclick="doChangePassword()">
+            Atualizar senha
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- MODAL DE EXCLUSÃO -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal-box">
+    <div class="modal-title">⚠️ Desativar conta</div>
+    <div class="modal-sub">Sua conta será desativada e você não conseguirá mais acessar a plataforma. Tem certeza?</div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeDeleteModal()">Cancelar</button>
+      <button class="btn btn-danger" id="confirm-delete-btn" onclick="doDeleteAccount()">Sim, desativar</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon" id="toastIcon"></span>
+  <span id="toastMsg"></span>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/user.js"></script>
+<script>
+  if (!requireAuth()) throw new Error('not auth');
+
+  // Fecha modal ao clicar fora
+  document.getElementById('deleteModal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeDeleteModal();
+  });
+
+  // Carrega dados do perfil
+  loadMe().then(() => loadProfileData());
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FStats — Criar conta</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<div class="auth-page">
+  <div class="auth-box" style="max-width:500px">
+    <div class="auth-logo">FStats</div>
+    <div class="auth-title">Criar conta</div>
+    <div class="auth-sub">Junte-se e acompanhe as estatísticas do futebol</div>
+
+    <div class="alert alert-error" id="reg-error"></div>
+    <div class="alert alert-success" id="reg-success"></div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Usuário *</label>
+        <input class="form-control" id="reg-username" type="text" placeholder="meu_usuario" />
+      </div>
+      <div class="form-group">
+        <label>Data de Nascimento</label>
+        <input class="form-control" id="reg-dob" type="date" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>E-mail</label>
+      <input class="form-control" id="reg-email" type="email" placeholder="email@exemplo.com" />
+    </div>
+    <div class="form-group">
+      <label>URL da Foto de Perfil</label>
+      <input class="form-control" id="reg-pic" type="url" placeholder="https://..." />
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Senha</label>
+        <div class="password-wrap">
+          <input class="form-control" id="reg-pass" type="password" placeholder="min. 8 caracteres" />
+          <button class="toggle-pass" onclick="togglePass('reg-pass',this)">👁</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Confirmar Senha</label>
+        <div class="password-wrap">
+          <input class="form-control" id="reg-confirm" type="password" placeholder="repita a senha" />
+          <button class="toggle-pass" onclick="togglePass('reg-confirm',this)">👁</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" id="reg-btn" onclick="doRegister()">
+      <span>Criar conta</span>
+    </button>
+
+    <div class="auth-footer">
+      Já tem conta? <a href="login.html">Entrar</a>
+    </div>
+  </div>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+</body>
+</html>
